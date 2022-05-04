@@ -1,5 +1,5 @@
 pipeline {
-    agent readTrusted('jenkins-pod.yaml')
+    agent {kubernetes {readTrusted('jenkins-pod.yaml')}}
     stages {
         stage('build') {
             steps {
