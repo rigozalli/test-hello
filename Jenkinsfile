@@ -9,7 +9,7 @@ podTemplate(containers: [
                     sh 'git init .'
                     sh 'git remote add origin https://github.com/rigozalli/test-hello.git'
                     sh 'git pull origin master'
-                    sh 'ls'
+                    sh 'mvn compile exec:java -Dexec.mainClass=“hello”'
                 }
             }
         }
