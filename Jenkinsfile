@@ -1,13 +1,9 @@
 pipeline {
     agent any
 
-    stages{
-        stage('Build'){
-            steps{ 
-                git 'https://github.com/rigozalli/test-hello.git'
-                sh 'sudo apt install -y maven'
-                sh 'mvn compile exec:java -Dexec.mainClass=“hello”'
-            }
+     container('maven') {
+            sh 'mvn -B -ntp -Dmaven.test.failure.ignore verify'
         }
-    }
+        junit '**/target/surefire-reports/TEST-*.xml'
+        archiveArtifacts '**/target/*.jar'
 }
