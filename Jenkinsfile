@@ -5,7 +5,7 @@ pipeline {
         stage('Build'){
             steps{ 
                 git 'https://github.com/rigozalli/test-hello.git'
-                sh 'apt install -y maven'
+                sh 'sudo apt install -y maven'
                 sh 'mvn compile exec:java -Dexec.mainClass=“hello”'
             }
         }
