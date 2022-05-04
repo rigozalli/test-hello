@@ -1,9 +1,10 @@
 pipeline {
-    agent any
-
-     container('maven') {
-            sh 'mvn -B -ntp -Dmaven.test.failure.ignore verify'
+    agent { docker { image 'maven:3.8.4-openjdk-11-slim' } }
+    stages {
+        stage('build') {
+            steps {
+                sh 'mvn compile exec:java -Dexec.mainClass=“hello”'
+            }
         }
-        junit '**/target/surefire-reports/TEST-*.xml'
-        archiveArtifacts '**/target/*.jar'
+    }
 }
