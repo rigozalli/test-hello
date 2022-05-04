@@ -6,6 +6,7 @@ podTemplate(containers: [
         stage('Get a Maven project') {
             container('maven') {
                 stage('Build a Maven project') {
+                    git 'https://github.com/rigozalli/test-hello.git'
                     sh 'mvn compile exec:java -Dexec.mainClass=“hello”'
                 }
             }
